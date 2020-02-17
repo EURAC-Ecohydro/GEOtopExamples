@@ -1,0 +1,5 @@
+"top_depth (cm)";"bottom_depth (cm)";"Dry density  (kg/m3)";"Carbon (g/kg)";"Total Nitrogen (g/kg)";"Organic Matter (g/kg)";"Stones (>0.5 cm) g/kg";"Gravel (0.2 to 0.5 cm) (g/kg)";"Fine soil (< 0.2 cm) (g/kg)";"Coarse sand.200 to 2000 microns (g/kg)";"Fine sand. 50 to 200 microns (g/kg)";"Coarse silt. 20 to 50 microns (g/kg)";"Fine silt. 2 to 20 microns (g/kg)";"Clay <2 microns. (g/kg)"
+0;5;0.95;41.50;16.89;71.80;14.90;0.58;985.00;51.00;243.00;146.00;259.00;301.00
+5;15;1.13;23.00;1.86;39.70;48.00;5.55;946.00;92.00;248.00;114.00;267.00;279.00
+15;25;1.18;13.80;1.23;23.90;8.41;1.53;990.00;77.00;242.00;138.00;267.00;276.00
+25;35;1.26;8.18;0.78;14.20;60.10;0.23;940.00;81.00;249.00;132.00;264.00;274.00

@@ -1,0 +1,409 @@
+!=======================================
+! GENERAL SETTINGS
+!=======================================
+
+!Calculation max time step dt in s 
+
+PointSim = 0
+
+TimeStepEnergyAndWater = 3600 
+InitDateDDMMYYYYhhmm = 01/10/2001 12:00 , 01/10/2001 12:00
+EndDateDDMMYYYYhhmm =  01/10/2002 12:00 , 01/10/2002 12:00
+NumSimulationTimes = 100 , 3
+
+! Catchment centroid (for Sun position) 
+Latitude  = 46.4180
+Longitude = 9.8214
+StandardTimeSimulation	=	0
+
+! Simulation settings
+WaterBalance = 1
+EnergyBalance = 1
+CalculateCastShadow = 1
+
+! Recovery files settings
+ContinuousRecovery = 365
+SubfolderRecoveryFiles = "out/rec"
+
+!Output timeseries Dt in hours 
+DtPlotDischarge = 2190 , 1
+DtPlotPoint = 2190 , 1
+DtPlotBasin = 8760 , 24
+BasinAll = 1
+
+!Output maps Dt in hours 
+OutputSoilMaps = 0 , 6
+OutputSurfEBALMaps = 0 , 6
+OutputMeteoMaps = 0 , 6
+OutputSnowMaps = 0 , 6
+
+!=======================================
+! METEO STATIONS
+!=======================================
+
+NumberOfMeteoStations = 1
+MeteoStationElevation = 1594
+MeteoStationWindVelocitySensorHeight = 10
+MeteoStationTemperatureSensorHeight = 2
+
+!======================================= 
+! METEO HAEDERS 
+!======================================= 
+!Davos
+NumberOfMeteoStations     = 1
+
+MeteoFile = "in/met"
+HorizonMeteoStationFile = "in/hor"
+
+HeaderDateDDMMYYYYhhmmMeteo = "date"
+HeaderJulianDayfrom0Meteo = "JD0"
+HeaderIPrec = "Prec"
+HeaderWindVelocity = "WindSp"
+HeaderWindDirection = "WindDir"
+HeaderWindX = "WE"
+HeaderWindY = "WN"
+HeaderRH = "RH"
+HeaderAirTemp = "AirT"
+HeaderDewTemp = "DewT"
+HeaderSWglobal = "Glob"
+HeaderCloudSWTransmissivity = "CT"
+
+HeaderHorizonAngle = "az"
+HeaderHorizonHeight = "el"
+
+WindAsSpeedAndDirection = 1
+RHAsDewTemperature = 0
+
+LapseRateTemp = 6.5
+LapseRateDewTemp = 2.5
+! LapseRatePrec = -0.0
+	
+!=======================================
+! LAND COVER
+!=======================================
+SoilRoughness	=	100
+ThresSnowSoilRough	=	100
+
+CanopyFraction	=	0
+! VegHeight	=	0
+! LSAI	=	0
+! RootDepth	=	200,0,0,0,500,0,20
+! MinStomatalRes	=	60
+! VegReflectVis	=	0.1
+! VegReflNIR	=	0.58
+! VegTransVis	=	0.05
+! VegTransNIR	=	0.25
+! LeafAngles	=	0
+! CanDensSurface	=	0.5
+
+SoilAlbVisDry	=	0.20
+SoilAlbNIRDry	=	0.30
+SoilAlbVisWet	=	0.20
+SoilAlbNIRWet	=	0.30
+
+SoilEmissiv	=	0.96
+
+SurFlowResLand	=	0.50
+SurFlowResExp	=	0.66 
+
+!=======================================
+! SOIL
+!=======================================
+
+SoilParFile = "in/soil"
+SoilLayerTypes = 1
+
+DefaultSoilTypeLand = 1
+DefaultSoilTypeChannel = 1
+DefaultSoilTypeBedrock = 1
+
+HeaderSoilDz = "D"
+! HeaderSoilInitPres = "P"
+HeaderSoilInitTemp = "T"
+HeaderNormalHydrConductivity = "K" 
+HeaderLateralHydrConductivity = "Kh"
+HeaderThetaRes = "R"
+HeaderThetaSat = "S"
+HeaderAlpha = "A"
+HeaderN = "N"
+HeaderKthSoilSolids = "kss"
+HeaderCthSoilSolids = "Css"
+HeaderSpecificStorativity = "SS"
+
+FrozenSoilHydrCondReduction  = 7
+
+InitWaterTableDepth = 1000
+ 
+! InitSoilTemp	=	0.5
+! ThetaRes	=	0.08
+! ThetaSat	=	0.5
+! NVanGenuchten	=	1.3
+! AlphaVanGenuchten	=	0.004
+! ThermalConductivitySoilSolids	=	2.5
+! ThermalCapacitySoilSolids	=	2.30E+06
+! SpecificStorativity	=	1.00E-08
+
+! BottomBoundaryHeatFlux = 0.05
+ 
+!=======================================
+! CHANNELS
+!=======================================
+
+RatioChannelWidthPixelWidth	=	0.2
+ChannelDepression	=	10
+
+!======================================= 
+! SNOW AND GLACIERS 
+!======================================= 
+InitSWE = 0
+InitSnowDensity = 200
+InitSnowTemp = -10
+
+MaxWaterEqSnowLayerContent=10
+SWEtop=40
+SWEbottom=20
+MaxSnowLayersMiddle=5
+
+SnowCorrFactor = 1
+RainCorrFactor = 1
+
+!======================================= 
+!Numerical parameters 
+!======================================= 
+ 
+RichardTol	=	1.E-5
+MinLambdaWater = 1.E-8
+RichardMaxIter	=	1500
+ExitMinLambdaWater = 1
+UpdateHydraulicConductivity = 0
+MinRatioKactualToKSat = 1E-5
+MinTimeStep = 1
+
+MaxCourantSupFlowLand	=	0.3
+MaxCourantSupFlowChannel	=	0.3
+MinSupWaterDepthLand	=	1 
+MinSupWaterDepthChannel =   1
+MinDiffSupWaterDepthLandChannel = 10
+MinTimeStepSupFlow	=	10
+
+ThresWaterDepthLandInf = 5
+ThresWaterDepthLandSup = 50
+ThresWaterDepthChannel = 100
+SurFlowResChannel = 20
+
+HeatEqTol	=	1.E-5
+HeatEqMaxIter	=	1000 
+! CanopyMaxIter	=	3 
+! BusingerMaxIter	=	3 
+! TsMaxIter	=	3 
+! LocMaxIter	=	3 
+
+!======================================= 
+! Morphological parameters
+!======================================= 
+
+SlopeWeight = 0
+CurvatureWeight = 0
+NumLowPassFilterOnDemForAll	=	0
+NumLowPassFilterOnDemForCurv	=	0
+DepthFreeSurfaceAtTheBoundary = 0
+
+!======================================= 
+! Energy budget settings 
+!======================================= 
+
+FlagSkyViewFactor	=	0 
+LWinParameterization	=	7 
+MoninObukhov	=	1
+
+! CanopyStabCorrection	=	1 
+
+!=============================================================================
+!  FILE NAMES
+!=============================================================================
+
+! Input files 
+
+DemFile = "in/dem"
+SkyViewFactorMapFile = "in/sky"
+SlopeMapFile = "in/slope"
+AspectMapFile = "in/aspect"
+RiverNetwork = "in/net"
+
+DEMRotationAngle = 90
+
+! Output files
+
+! Tabs 
+DischargeFile = "out/tabs/discharge"
+SnowCoveredAreaFile = "out/tabs/snowcover"
+BasinOutputFile = "out/tabs/basin" 
+BasinAll = 1
+
+! Maps
+
+!SoilTempTensorFile = "out/tens/T"
+!SoilLiqContentTensorFile = "out/tens/thetaliq"
+!SoilIceContentTensorFile = "out/tens/thetaice"
+!SoilLiqWaterPressTensorFile = "out/tens/Pw"
+!SoilTotWaterPressTensorFile = "out/tens/Pt"
+
+
+LandSurfaceWaterDepthMapFile = "out/maps/hsup"
+ThawedSoilDepthMapFile = "out/maps/activelayerbottom"
+ThawedSoilDepthFromAboveMapFile = "out/maps/activelayertop"
+WaterTableDepthMapFile  = "out/maps/wt"
+WaterTableDepthFromAboveMapFile  = "out/maps/wttop"
+AirTempMapFile = "out/maps/Ta"
+SurfaceTempMapFile = "out/maps/Ts"
+PrecipitationMapFile = "out/maps/Prec"
+NetPrecipitationMapFile = "out/maps/Precnet"
+EvapotranspirationFromSoilMapFile = "out/maps/evap"
+SWEMapFile = "out/maps/SWE"
+SnowDepthMapFile = "out/maps/snowdepth"
+SnowDurationMapFile = "out/maps/snowduration"
+SnowMeltedMapFile = "out/maps/snowmelt"
+SnowSublMapFile = "out/maps/snowsubl"
+NetRadiationMapFile = "out/maps/Rn"
+InLongwaveRadiationMapFile = "out/maps/LWin"
+NetLongwaveRadiationMapFile = "out/maps/LW"
+NetShortwaveRadiationMapFile = "out/maps/SW"
+InShortwaveRadiationMapFile = "out/maps/SWin"
+DirectInShortwaveRadiationMapFile = "out/maps/SWindir"
+ShadowFractionTimeMapFile = "out/maps/shadow"
+SurfaceHeatFluxMapFile = "out/maps/EB"
+SurfaceSensibleHeatFluxMapFile = "out/maps/H"
+SurfaceLatentHeatFluxMapFile = "out/maps/LE"
+
+ChannelSurfaceWaterDepthMapFile = "out/ch/h"
+
+!=============================================================================
+!  PLOT
+!=============================================================================
+
+CoordinatePointX =  90 , 150 , 190 , 190 , 230 , 290
+CoordinatePointY = 130 , 130 , 170 , 50  , 130 , 130
+
+PointOutputFile = "out/tabs/point"
+SoilTempProfileFile = "out/tabs/T"
+SoilAveragedTempProfileFile = "out/tabs/Ta"
+SoilLiqWaterPressProfileFile = "out/tabs/P"
+SoilTotWaterPressProfileFile = "out/tabs/Pt"
+SoilLiqContentProfileFile = "out/tabs/L"
+SoilAveragedLiqContentProfileFile = "out/tabs/La"
+SoilIceContentProfileFile = "out/tabs/I"
+SoilAveragedIceContentProfileFile = "out/tabs/Ia"
+SoilSaturationRatioProfileFile = "out/tabs/Sr"
+
+SnowTempProfileFile = "out/tabs/ST"
+SnowLiqContentProfileFile = "out/tabs/SL"
+SnowIceContentProfileFile = "out/tabs/SI"
+SnowDepthLayersFile = "out/tabs/SD"
+SnowPlotDepths = -1,-5,-10,-20,-30,-60,-90,-120,-150,-180,-210,-240,-270,-300,-330,-360,-390,-420,-450,-480,-510,-540,-570,-600,-630,-660,-690,-720,-750,-780,-810,-840,-870,-900,-930,-960,-990,-1020,-1050,-1080,-1110,-1140,-1170,-1200,-1230,-1260,-1290,-1320,-1350,-1380,-1410,-1440,-1470,-1500,-1530,-1560,-1590,-1620,-1650,-1680,-1710,-1740,-1770,-1800,-1830,-1860,-1890,-1920,-1950,-1980,-2010,-2040,-2070,-2100,-2130,-2160,-2190,-2220,-2250,-2280,-2310,-2340,-2370,-2400,-2430,-2460,-2490,-2520,-2550,-2580,-2610,-2640,-2670,-2700,-2730,-2760,-2790,-2820,-2850,-2880,-2910,-2940,-2970,-3000,-3030,-3060,-3090,-3120,-3150,-3180,-3210,-3240,-3270,-3300,-3330,-3360,-3390,-3420,-3450,-3480,-3510,-3540,-3570,-3600,-3630,-3660,-3690,-3720,-3750,-3780,-3810,-3840,-3870,-3900,-3930,-3960,-3990,-4020,-4050,-4080,-4110,-4140,-4170,-4200,-4230,-4260,-4290,-4320,-4350,-4380,-4410,-4440,-4470,-4500,-4530,-4560,-4590,-4620,-4650,-4680,-4710,-4740,-4770,-4800,-4830,-4860,-4890,-4920,-4950,-4980,-5010
+
+!PointAll = 1
+!SnowAll = 1
+!SoilAll = 1
+
+HeaderDatePoint = "Date"
+HeaderJulianDayFromYear0Point = "JD0"
+HeaderTimeFromStartPoint ="Days"
+HeaderPeriodPoint = "Period"
+HeaderRunPoint ="Run"
+! HeaderIDPointPoint = "ID"
+HeaderPsnowPoint = "Snowfall"
+HeaderPrainPoint = "Rainfall"
+HeaderWindSpeedPoint = "Windspeed"
+HeaderWindDirPoint = "Winddir"
+HeaderRHPoint = "RH"
+HeaderAirTempPoint = "Tair"
+HeaderTDewPoint = "Tdew"
+HeaderTsurfPoint = "Tsurface"
+HeaderSurfaceEBPoint = "EBsurf"
+HeaderSoilHeatFluxPoint = "G"
+HeaderSWinPoint = "SWin"
+HeaderSWbeamPoint = "SWb"
+HeaderSWdiffPoint = "SWd"
+HeaderLWinPoint = "LWin"
+HeaderSWNetPoint = "SW"
+HeaderLWNetPoint = "LW"
+HeaderHPoint = "H"
+HeaderLEPoint = "LE"
+HeaderEvapSurfacePoint = "Evap"
+HeaderSnowDepthPoint = "SnowD"
+HeaderSWEPoint = "SWE"
+HeaderSnowDensityPoint = "Snowdensity"
+HeaderSnowTempPoint = "SnowT"
+HeaderSnowMeltedPoint = "SnowMelted"
+HeaderSnowSublPoint = "SnowSubl"
+HeaderLowestThawedSoilDepthPoint = "UpperLimitActiveLayer"
+HeaderHighestThawedSoilDepthPoint = "LowerLimitActiveLayer"
+HeaderLowestWaterTableDepthPoint = "LowestWaterTable"
+HeaderHighestWaterTableDepthPoint = "HigherWaterTable"
+
+HeaderDateSnow = "Date"
+HeaderJulianDayFromYear0Snow = "JD0"
+HeaderTimeFromStartSnow ="Days"
+HeaderPeriodSnow = "Period"
+HeaderRunSnow ="Run"
+! HeaderIDPointSnow = "ID"
+
+HeaderDateSoil = "Date"
+HeaderJulianDayFromYear0Soil = "JD0"
+HeaderTimeFromStartSoil ="Days"
+HeaderPeriodSoil = "Period"
+HeaderRunSoil ="Run"
+! HeaderIDPointSoil = "ID"
+
+DatePoint = 1
+JulianDayFromYear0Point = 2
+TimeFromStartPoint = 3
+PeriodPoint = 4
+RunPoint = 5
+LowestThawedSoilDepthPoint = 6
+HighestThawedSoilDepthPoint = 7
+SnowDepthPoint = 8
+SWEPoint = 9
+SnowDensityPoint = 10
+SnowTempPoint = 11
+SnowMeltedPoint = 12
+SnowSublPoint = 13
+LowestWaterTableDepthPoint = 14
+HighestWaterTableDepthPoint = 15
+PsnowPoint = 16
+PrainPoint = 17
+WindSpeedPoint = 18
+WindDirPoint = 19
+RHPoint = 20
+AirTempPoint = 21
+TDewPoint = 22
+TsurfPoint = 23
+SurfaceEBPoint = 24
+SoilHeatFluxPoint = 25
+SWNetPoint = 26
+LWNetPoint = 27
+HPoint = 28
+LEPoint = 29
+SWinPoint = 30
+SWbeamPoint = 31
+SWdiffPoint = 32
+LWinPoint = 33
+EvapSurfacePoint = 34
+
+DateSnow = 1
+JulianDayFromYear0Snow = 2
+TimeFromStartSnow =3
+PeriodSnow = 4
+RunSnow =5
+
+DateSoil = 1
+JulianDayFromYear0Soil = 2
+TimeFromStartSoil =3
+PeriodSoil = 4
+RunSoil =5
+
+SuccessfulRunFile = "out/_SUCCESSFUL_RUN"
+FailedRunFile = "out/_FAILED_RUN"
+
+DDChannel = 0
+DDLand = 0

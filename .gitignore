@@ -1,0 +1,11 @@
+# List of files/folder not tracked by Git
+
+# emacs backup files
+*~
+
+# Info files
+gitlab_website.url
+
+
+# Checkpoint folder automatically created by jupiter-notebook
+tests/*/plotting_scripts/.ipynb_checkpoints*

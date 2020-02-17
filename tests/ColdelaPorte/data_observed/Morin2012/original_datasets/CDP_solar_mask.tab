@@ -1,0 +1,90 @@
+/* DATA DESCRIPTION:
+Citation:	Morin, Samuel; Lejeune, Yves; Lesaffre, Bernard; Panel, Jean-Michel; Poncet, Daniel; David, Pierre; Sudul, Marcel (2012): Solar masks at Col de Porte, France. PANGAEA, https://doi.org/10.1594/PANGAEA.774217, 
+	In supplement to: Morin, S et al. (2012): A 18-yr long (1993-2011) snow and meteorological dataset from a mid-altitude mountain site (Col de Porte, France, 1325 m alt.) for driving and evaluating snowpack models. Earth System Science Data, 4(1), 13-21, https://doi.org/10.5194/essd-4-13-2012
+Further details:	Image of the solar masks at Col de Porte, France (URI: hdl:10013/epic.38613.d006)
+Project(s):	Climatology of snow/atmosphere interactions, atmospheric boundary layer and snowpack properties (CENACLAM) (URI: http://portail.osug.fr/CENACLAM.html?lang=en)
+Coverage:	LATITUDE: 45.300000 * LONGITUDE: 5.770000
+	DATE/TIME START: 1993-08-01T00:00:00 * DATE/TIME END: 2011-07-31T00:00:00
+	MINIMUM ELEVATION: 1325.0 m * MAXIMUM ELEVATION: 1325.0 m
+Event(s):	CDP (Col de Porte) * LATITUDE: 45.300000 * LONGITUDE: 5.770000 * DATE/TIME START: 1993-08-01T00:00:00 * DATE/TIME END: 2011-07-31T00:00:00 * ELEVATION: 1325.0 m * LOCATION: Chartreuse range, France * DEVICE: Weather station/meteorological observation (WST)
+Comment:	Two masks (up and down) are given (in ° above horizon), as a function of solar azimuth (0 is true North). Between mask up and mask down, only a fraction (percentage) of the direct solar radiation reaches the ground. Below the mask down elevation angle, 100% of the direct solar radiation is cut. See further details for a plot of solar masks.
+Parameter(s):	Azimuth [deg] (Azim) * PI: Morin, Samuel (https://orcid.org/0000-0002-1781-687X, samuel.morin@lgge.obs.ujf-grenoble.fr, http://www.cnrm-game.fr/spip.php?article250&lang=en)
+	Elevation angle [deg] (alpha) * PI: Morin, Samuel (https://orcid.org/0000-0002-1781-687X, samuel.morin@lgge.obs.ujf-grenoble.fr, http://www.cnrm-game.fr/spip.php?article250&lang=en) * COMMENT: up
+	Elevation angle [deg] (alpha) * PI: Morin, Samuel (https://orcid.org/0000-0002-1781-687X, samuel.morin@lgge.obs.ujf-grenoble.fr, http://www.cnrm-game.fr/spip.php?article250&lang=en) * COMMENT: down
+	Percentage [%] (Perc) * PI: Morin, Samuel (https://orcid.org/0000-0002-1781-687X, samuel.morin@lgge.obs.ujf-grenoble.fr, http://www.cnrm-game.fr/spip.php?article250&lang=en)
+License:	Creative Commons Attribution 3.0 Unported (CC-BY-3.0)
+Size:	288 data points
+*/
+Azim [deg]	alpha [deg] (up)	alpha [deg] (down)	Perc [%]
+5	10	10	50
+10	14	14	50
+15	22	22	50
+20	25	25	50
+25	26	26	50
+30	24	24	50
+35	24	24	50
+40	24	24	50
+45	23	23	50
+50	28	28	50
+55	29	29	50
+60	28	28	50
+65	23	23	50
+70	21	21	50
+75	25	25	50
+80	39	39	50
+85	35	35	50
+90	31	31	50
+95	30	30	50
+100	28	28	50
+105	29	28	50
+110	38	37	50
+115	42	42	50
+120	42	39	50
+125	45	45	50
+130	38	37	50
+135	33	27	50
+140	37	21	41
+145	27	18	37
+150	18	18	50
+155	21	18	50
+160	21	11	70
+165	8	7	52
+170	12	12	50
+175	19	16	54
+180	21	18	73
+185	23	22	41
+190	23	23	37
+195	21	21	35
+200	20	19	60
+205	14	8	35
+210	6	5	48
+215	9	9	50
+220	11	11	50
+225	11	11	50
+230	7	7	50
+235	9	9	50
+240	11	11	50
+245	12	12	50
+250	12	12	50
+255	12	12	50
+260	11	11	50
+265	10	10	50
+270	11	11	50
+275	12	12	50
+280	11	11	50
+285	18	11	44
+290	25	10	61
+295	21	10	38
+300	11	10	48
+305	11	11	50
+310	12	12	50
+315	11	11	50
+320	11	11	50
+325	10	10	50
+330	10	10	50
+335	9	9	50
+340	9	9	50
+345	8	8	50
+350	8	8	50
+355	8	8	50
+360	9	9	50

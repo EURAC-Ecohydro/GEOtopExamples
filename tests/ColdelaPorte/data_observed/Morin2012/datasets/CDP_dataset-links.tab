@@ -1,0 +1,8 @@
+File name	File format	Comment	URL file
+CDP_daily_eval	netCDF, zipped	Snowpack-related evaluation data at the daily time resolution (automated and manual snowdepth and SWE, runoff, albedo). The time information of each record is daily at 12:00 UTC.	hdl:10013/epic.38613.d001
+CDP_hor_disk	netCDF, zipped	Settling disk information (temperature, height above ground) at the hourly time resolution.	hdl:10013/epic.38613.d002
+CDP_hor_eval	netCDF, zipped	Snowpack-related evaluation data at the hourly time resolution (albedo, runoff, surface temperature, snow depth). Data are missing during the summer period when the continuity of the record is not warranted.	hdl:10013/epic.38613.d003
+CDP_met_insitu	netCDF, zipped	Meteorological forcing data at hourly time step. "Summer" data are taken from the SAFRAN reanalysi; the variable "Tair_flag" indicates whether in-situ or SAFRAN data is provided for each record.	hdl:10013/epic.38613.d004
+CDP_met_safran	netCDF, zipped	Meteorological forcing data at hourly time step from the SAFRAN reanalysis.	hdl:10013/epic.38613.d005
+CDP_profiles	ASCII, zipped	directory ascii contains ASCII files (.dat) for driving and evaluation of snowpack scheme, which contain information similar to the netCDF files described above.	hdl:10013/epic.38613.d010
+CDP_ascii	ASCII, zipped	directory profiles contains snow pit data covering the same time period, encoded using the CAAML/IACS convention. The profiles are placed in caaml files, using the following naming convention: colPort_YYYYMMDDHH.caaml.	hdl:10013/epic.38613.d011
