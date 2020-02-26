@@ -9,6 +9,6 @@ Prepared by Giacomo Bertoldi, February 2020
 
 We consider here three test cases:
 
-- **Borden05m**: it is a laboratory catchment to test discharge simulation
-- **ColdelaPorte**: it is a snow obervation site to test plot scale cryospheric variables simulation
-- **Matsch_B2_Ref_007**: it is a an experimentaö site to test plot scale water and energy fluxes simulation
+- [**Borden05m**:](https://github.com/EURAC-Ecohydro/GEOtopExamples/tree/master/tests/Borden05m) it is a laboratory catchment to test discharge simulation 
+- [**ColdelaPorte**:](https://github.com/EURAC-Ecohydro/GEOtopExamples/tree/master/tests/ColdelaPorte) it is a snow obervation site to test plot scale cryospheric variables simulation
+- [**Matsch_B2_Ref_007**:](https://github.com/EURAC-Ecohydro/GEOtopExamples/tree/master/tests/Matsch_B2_Ref_007) it is a an experimentaö site to test plot scale water and energy fluxes simulation
