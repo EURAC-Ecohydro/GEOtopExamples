@@ -9,3 +9,9 @@ gitlab_website.url
 
 # Checkpoint folder automatically created by jupiter-notebook
 tests/*/plotting_scripts/.ipynb_checkpoints*
+
+# GEOtop output files folders
+tests/Borden05m/sims/*/output-maps/*
+tests/Borden05m/sims/*/output-tabs/*
+tests/ColdelaPorte/sims/*/output-tabs/*
+tests/Matsch_B2_Ref_007/sims/*/output-tabs/*
