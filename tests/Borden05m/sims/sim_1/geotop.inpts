@@ -1,7 +1,7 @@
 !*******************************
 !******* CONFIGURATION FOR GEOTOP V.2.0 UZH *********
 !*******************************
-TimeStepEnergyAndWater = 20
+TimeStepEnergyAndWater = 10
 !Integrations time step [s] for energy and water balance equation 
 InitDateDDMMYYYYhhmm = 01/06/2000 12:00
 EndDateDDMMYYYYhhmm =  01/06/2000 14:00
@@ -26,8 +26,8 @@ Longitude              = 10.70311
 NumberOfMeteoStations = 1
 !!!46.687564°, 10.545664°
 !!!UTM	5171605 618192 32T
-MeteoStationCoordinateX=620400.000000 
-MeteoStationCoordinateY=5168100.000000	
+MeteoStationCoordinateX = 620235 
+MeteoStationCoordinateY = 5168008
 MeteoStationElevation=3
 MeteoStationLatitude=46.65564 
 MeteoStationLongitude=10.57361  
@@ -51,13 +51,13 @@ HeaderIPrec = "Iprec"
 
 
 
-!*******************************
-!******* HORIZON  *********
-!*******************************
-HorizonPointFile="input/horizon"
-HorizonMeteoStationFile="input-meteo/horizon"
-HeaderHorizonAngle="azimuth"
-HeaderHorizonHeight="horizon_ele"
+
+
+
+
+
+
+
 
 
 
@@ -184,26 +184,25 @@ FreeDrainageAtLateralBorder = 1
 DepthFreeSurfaceAtTheBoundary = 2000
 
 
-!*******************************
-!****Snow Inputs****************
-!*******************************
 
-MaxWaterEqSnowLayerContent = 10
-SWEtop = 40
-SWEbottom = 20
-MaxSnowLayersMiddle = 5
-AlphaSnow = 100
-DefaultGlac = 0
-InitGlacierDensity = 700
-InitGlacierTemp = -5
-NumMaxGlacierLayers = 5                                                              
-FreshSnowReflVis = 0.98
-FreshSnowReflNIR = 0.65
-SnowAgingCoeffVis = 0.175                                                     
-SnowAgingCoeffNIR = 0.4375
-GWEtop = 300
-GWEbottom = 100
-MaxGlacLayersMiddle = 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -227,7 +226,7 @@ DischargeFile = "output-tabs/discharge"
 DtPlotDischarge=0.016666667
 ! 1 minute
 
-SoilTempProfileFile="output-tabs/soiltemp"
+! SoilTempProfileFile="output-tabs/soiltemp"
 SoilLiqContentProfileFile = "output-tabs/soilwater"
 ! SoilAveragedLiqContentProfileFile = "output-tabs/avesoilwater"
 SoilAll=1
@@ -236,18 +235,16 @@ BasinOutputFile = "output-tabs/basin"
 DtPlotBasin=0.016666667
 ! 1 minute
 BasinAll = 1
-
-! 
-GlacAll = 1   
+  
 
 !=============================================================================
 !  OUTPUT MAPS
 !=============================================================================
 
 ! Output maps Dt in hours 
-OutputSoilMaps=0.1	  
-OutputSurfEBALMaps=0.1	  
-OutputMeteoMaps = 0.1
+OutputSoilMaps=0.05
+OutputSurfEBALMaps=0.05
+OutputMeteoMaps = 0.05
 
 ! soil moisture & temperature
 !FirstSoilLayerAveragedTempMapFile = "output-maps/MMGST"
@@ -292,4 +289,4 @@ NetPrecipitationFile = "output-maps/Pnet"
 
 !SubfolderRecoveryFiles="rec"
 !ContinuousRecovery = 0.0625
-!RecoverTime = 0.05
+RecoverTime = 0.05
