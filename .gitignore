@@ -17,5 +17,23 @@ tests/ColdelaPorte/sims/*/output-tabs/*
 tests/Matsch_B2_Ref_007/sims/*/output-tabs/*
 # GEOtop output files folders (added by EC)
 tests/ColdelaPorte/sims/*/output*
-tests/Borden05m/sims/*/output
-tests/Matsch_B2_Ref_007/sims/*/output
+tests/Borden05m/sims/*/output*
+tests/Matsch_B2_Ref_007/sims/*/output*
+tests/ColdelaPorte/sims/*/*.log
+tests/Borden05m/sims/*/*.log
+tests/Matsch_B2_Ref_007/sims/*/*.log
+tests/ColdelaPorte/sims/*/*.old
+tests/Borden05m/sims/*/*.old
+tests/Matsch_B2_Ref_007/sims/*/*.old
+tests/ColdelaPorte/sims/*/_SUCCESSFUL_RUN
+tests/Borden05m/sims/*/_SUCCESSFUL_RUN
+tests/Matsch_B2_Ref_007/sims/*/_SUCCESSFUL_RUN
+tests/ColdelaPorte/sims/*/*/*.old
+tests/Borden05m/sims/*/*/*.old
+tests/Matsch_B2_Ref_007/sims/*/*/*.old
+
+tests/ColdelaPorte/*/*/*.log
+tests/Borden05m/*/*/*.log
+tests/Matsch_B2_Ref_007/*/*/*.log
+
+
