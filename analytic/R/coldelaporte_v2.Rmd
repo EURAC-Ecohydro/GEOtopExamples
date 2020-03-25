@@ -1,0 +1,177 @@
+---
+title: "Col de la Porte"
+output:
+  html_document:
+    df_print: paged
+bibliography: bibliography.bib
+---
+
+
+#### Model: GEOtop v3.0
+Compiler: gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.1) 
+Processor: Intel(R) Core(TM) i7-5500U CPU @ 2.40GHz
+Author: Stefano Endrizzi (stefano.end@gmail.com),Emanuele Cordano (emanuele.cordano@rendena100.eu)
+Date: 25-11-2016
+
+#### Name: ColdelaPorte
+Description: Simulation 1D over the Col de la Porte dataset to test the capability of GEOotp to simulate snow depth, snow water equivalent, soil temperature.
+
+
+
+#### Results published in:
+
+First result with GEOtop v 2.0 are illustrated in the repot XXX  (@Endrizzi2014 , supplemantary material). 
+The following simulated variables have  been tested against observations:
+
+- Snow Height (Snow Dapth);
+
+- Snow Water Equivalent;
+
+- Soil Temperature at 10 cm depth;
+
+- Soil temparature at 20 cm depth;
+
+- Soil Temparature at 50 cm depth;
+
+- Surface Temparature ;
+
+- Albedo .
+
+
+
+<!-- - *Endrizzi S., Gruber S., Dall’Amico M., Rigon R., GEOtop 2.0.: Simulating the combined energy and water balance at and below the land surface accounting for soil freezing, snow cover and terrain effects, Geosci. Model Dev., 2014* -->
+
+<!-- ![ColdelaPorte Example Results of GEOtop 2.0 (not reproducible)](images/Geotop-ColDePorte_Endrizzi2014.pdf) -->
+
+
+
+#### Simulation duration:
+
+
+InitDateDDMMYYYYhhmm   = 21/09/2001 00:00
+EndDateDDMMYYYYhhmm    = 10/04/2002 00:00
+
+### Output:
+PointOutputFile = "output-tabs/surface"
+
+
+```{r}
+library(dplyr)
+library(geotopbricks)
+library(magrittr)
+library(reshape2)
+wpath <- '/home/ecor/activity/2020/geotop_article/git/GEOtopExamples/tests/ColdelaPorte/sims' 
+wpaths <- wpath %>% list.files(pattern="sim",full.name=TRUE)
+names(wpaths) <- wpath %>% list.files(pattern="sim",full.name=FALSE)
+
+outvar <- c("Tair.C.","Tsurface.C.","snow_depth.mm.","snow_water_equivalent.mm.","SWin.W.m2.","SWbeam.W.m2","SWdiff.W.m2.","SWnet.W.m2.","SWup.W.m2.") 
+date_field <- "Date12.DDMMYYYYhhmm."
+tz <- "Etc/GMT-1"
+add_suffix_dir="_v3"
+####
+
+point <- NULL
+##tempz <- list()
+
+
+for (it in names(wpaths)) {
+   
+   wpath <- wpaths[it]
+   o <- get.geotop.inpts.keyword.value("PointOutputFile",data.frame=TRUE,wpath=wpath,add_suffix_dir=add_suffix_dir,date_field=date_field,tz=tz)
+   ###
+   time <- index(o)
+   o <- as.data.frame(o)
+   o$time <- as.POSIXct(time)
+   o <- o %>% melt(id="time") 
+   o <- o %>% filter(variable %in% outvar)
+   o$sim <- it
+   point <- rbind(point,o)
+   o <- get.geotop.inpts.keyword.value("SoilAveragedTempProfileFile",data.frame=TRUE,wpath=wpath,zlayer.formatter="z%04d",add_suffix_dir=add_suffix_dir,date_field=date_field,tz=tz)
+   time <- index(o)
+   o <- as.data.frame(o)
+   o$time <- as.POSIXct(time)
+   o <- o %>% melt(id="time")
+   o$variable <- paste0("temp",o$variable)
+   o$sim <- it
+  point <- rbind(point,o)
+   
+}
+
+str(point)
+
+```
+
+
+#### Observations published in:
+
+see @Morin2012
+<!-- - *Morin, S., Lejeune, Y., Lesaffre, B., Panel, J.-M., Poncet, D., David, -->
+<!-- P., and Sudul, M.: An 18-yr long (1993–2011) snow and meteorological dataset from a mid-altitude mountain site (Col de Porte, -->
+<!-- France, 1325 m alt.) for driving and evaluating snowpack models, Earth Syst. Sci. Data, 4, 13–21, doi:10.5194/essd-4-13-2012, -->
+<!-- 2012.* -->
+
+```{r}
+
+csv <- '/home/ecor/activity/2020/geotop_article/git/GEOtopExamples/tests/ColdelaPorte/obss/obs/obs_dataset.txt' 
+obs <- read.table(csv,header=TRUE,sep=",")
+names(obs)[names(obs)=="Date"] <- "time"
+obs <- obs %>% melt(id="time")
+obs$time <- as.POSIXct(obs$time,tz=tz)
+obs$sim <- "obs"
+obs$variable <- as.character(obs$variable)
+
+#> point$variable %>% unique() %>% as.character()
+# [1] "Tair.C."                   "Tsurface.C."               "SWin.W.m2."                "SWdiff.W.m2."             
+# [5] "SWnet.W.m2."               "SWup.W.m2."                "snow_depth.mm."            "snow_water_equivalent.mm."
+# [9] "tempz0010"                 "tempz0020"                 "tempz0050"                
+#> obs$variable %>% unique() %>% as.character()
+#[1] "HS_mm"      "Tsurface_C" "Tsoil10_C"  "Tsoil20_C"  "Tsoil50_C" 
+ 
+obs$variable[obs$variable=="HS_mm"] <- "snow_depth.mm."
+obs$variable[obs$variable=="Tsurface_C"] <- "Tsurface.C."
+obs$variable[obs$variable=="Tsoil10_C"] <- "tempz0010"
+obs$variable[obs$variable=="Tsoil20_C"] <- "tempz0020"
+obs$variable[obs$variable=="Tsoil50_C"] <- "tempz0050"
+nobs <-  obs$variable %>% unique() %>% as.character()
+point <- rbind(point,obs)
+```
+
+## Winter 2001/2002
+
+
+```{r} 
+
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+year <- 2000
+start <- "%04d-08-01" %>% sprintf(year) %>% as.Date()
+end <- start+years(1)
+
+pointc <- point %>% filter(variable %in% nobs) %>% filter(time >= start & time<=end)
+
+g <- ggplot()+geom_line(aes(x=time,y=value,group=sim,col=sim),data=pointc)+theme_bw()+facet_grid(variable ~ .,scales="free_y")
+g
+```
+
+
+
+
+
+### Observations:
+Snow heigth mm, Snow Water Equivalent mm, T surface C, T soil 10cm C,T soil 20cm C,T soil 50cm C
+
+
+
+
+
+
+
+### References
+
+```{r generateBibliography,echo=FALSE,eval=TRUE,message=FALSE,warning=FALSE,print=FALSE,results="hide"}
+require("knitcitations")
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "bibliography.bib")
+
