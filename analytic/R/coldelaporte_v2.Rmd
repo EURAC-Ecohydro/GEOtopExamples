@@ -55,7 +55,7 @@ EndDateDDMMYYYYhhmm    = 10/04/2002 00:00
 PointOutputFile = "output-tabs/surface"
 
 
-```{r}
+```{r eval=TRUE,echo=FALSE,output=FALSE,results="hide",message=FALSE}
 library(dplyr)
 library(geotopbricks)
 library(magrittr)
@@ -110,8 +110,8 @@ see @Morin2012
 <!-- France, 1325 m alt.) for driving and evaluating snowpack models, Earth Syst. Sci. Data, 4, 13–21, doi:10.5194/essd-4-13-2012, -->
 <!-- 2012.* -->
 
-```{r}
-
+```{r eval=TRUE,echo=FALSE,output=FALSE,results="hide",message=FALSE}
+   
 csv <- '/home/ecor/activity/2020/geotop_article/git/GEOtopExamples/tests/ColdelaPorte/obss/obs/obs_dataset.txt' 
 obs <- read.table(csv,header=TRUE,sep=",")
 names(obs)[names(obs)=="Date"] <- "time"
@@ -133,28 +133,56 @@ obs$variable[obs$variable=="Tsoil10_C"] <- "tempz0010"
 obs$variable[obs$variable=="Tsoil20_C"] <- "tempz0020"
 obs$variable[obs$variable=="Tsoil50_C"] <- "tempz0050"
 nobs <-  obs$variable %>% unique() %>% as.character()
-point <- rbind(point,obs)
+point <- rbind(point,obs)  %>% filter(!is.na(value))
 ```
 
 ## Winter 2001/2002
 
 
-```{r} 
+```{r eval=TRUE,echo=FALSE,output=FALSE,results="hide",message=FALSE}
+
+###{r echo=FALSE,out.width='90%', fig.align='center', fig.cap=NULL, fig.height=5,results='asis',warning=FALSE}
 
 library(ggplot2)
 library(dplyr)
 library(lubridate)
-year <- 2000
+library(purrr)
+
+year <- 2001
 start <- "%04d-08-01" %>% sprintf(year) %>% as.Date()
 end <- start+years(1)
 
 pointc <- point %>% filter(variable %in% nobs) %>% filter(time >= start & time<=end)
 
-g <- ggplot()+geom_line(aes(x=time,y=value,group=sim,col=sim),data=pointc)+theme_bw()+facet_grid(variable ~ .,scales="free_y")
+g <- ggplot()+geom_line(aes(x=time,y=value,group=sim,linetype=sim),data=pointc)+theme_bw()+facet_grid(variable ~ .,scales="free_y")
 g
 ```
 
 
+```{r eval=TRUE,echo=FALSE,output=FALSE,results="hide",message=FALSE,warning=FALSE} 
+
+library(hydroGOF)
+
+
+obsc <- pointc %>% filter(sim=="obs") %>% transmute(time=time,variable=variable,obs=value)
+pointd <- pointc %>% group_by(sim) %>% left_join(obsc) %>% as.data.frame()
+
+oo <- pointd %>% group_by(sim,variable) %>% group_split() %>% map(as.data.frame) %>% map(function(x) {o <- as.data.frame(gof(sim=x[,"value"],obs=x[,"obs"]));names(o) <- x[1,"variable"];o$sim <- x[1,"sim"];o$gof <- rownames(o);return(o)})  
+
+sims <- sapply(oo,FUN=function(x){x[1,"sim"]})
+oo <-   oo %>% tapply(INDEX=sims,FUN=do.call,what="cbind") %>% map(function(x){x[,!(duplicated(names(x))) & names(x)!="sim"]}) %>% map(function(x){x[c(c("gof"),names(x)[names(x)!="gof"])]}) %>% map(function(x) {x %>% filter(gof %in% c("MAE","RMSE","KGE"))}) 
+
+######
+for (it in names(oo)) {
+   
+   print(knitr::kable(oo[[it]]))
+   
+}
+
+
+######
+
+```
 
 
 
