@@ -6,6 +6,10 @@ output:
 bibliography: bibliography.bib
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE,dev="png",fig.asp=0.46,dpi=100,fig.height =6)
+```
+
 
 #### Model: GEOtop v3.0
 Compiler: gcc version 4.8.4 (Ubuntu 4.8.4-2ubuntu1~14.04.1) 
@@ -102,9 +106,13 @@ str(point)
 ```
 
 
-#### Observations published in:
 
-see @Morin2012
+
+### Observations:
+
+
+Snow heigth mm, Snow Water Equivalent mm(NOT FOUND), T surface C, T soil 10cm C,T soil 20cm C,T soil 50cm C
+see @Morin2012.
 <!-- - *Morin, S., Lejeune, Y., Lesaffre, B., Panel, J.-M., Poncet, D., David, -->
 <!-- P., and Sudul, M.: An 18-yr long (1993–2011) snow and meteorological dataset from a mid-altitude mountain site (Col de Porte, -->
 <!-- France, 1325 m alt.) for driving and evaluating snowpack models, Earth Syst. Sci. Data, 4, 13–21, doi:10.5194/essd-4-13-2012, -->
@@ -136,8 +144,9 @@ nobs <-  obs$variable %>% unique() %>% as.character()
 point <- rbind(point,obs)  %>% filter(!is.na(value))
 ```
 
-## Winter 2001/2002
+### Winter 2001/2002
 
+Here is a comparison plot:
 
 ```{r eval=TRUE,echo=FALSE,output=FALSE,results="hide",message=FALSE}
 
@@ -147,6 +156,23 @@ library(ggplot2)
 library(dplyr)
 library(lubridate)
 library(purrr)
+##library(RColorBrewer)
+
+####  https://colorbrewer2.org/#type=qualitative&scheme=Set3&n=8
+color_obs <- "black"
+colors <- c("#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5",color_obs)
+names(colors) <- point$sim %>% unique()
+
+if (colors["obs"]!=color_obs) {
+   
+   colors[names(colors)!="obs"] <- colors[colors!=color_obs]
+   colors["obs"] <- color_obs
+   
+}
+alphas <- array(0.5,length(colors))
+names(alphas) <- names(colors)
+alphas["obs"] <- 1
+####
 
 year <- 2001
 start <- "%04d-08-01" %>% sprintf(year) %>% as.Date()
@@ -154,12 +180,14 @@ end <- start+years(1)
 
 pointc <- point %>% filter(variable %in% nobs) %>% filter(time >= start & time<=end)
 
-g <- ggplot()+geom_line(aes(x=time,y=value,group=sim,linetype=sim),data=pointc)+theme_bw()+facet_grid(variable ~ .,scales="free_y")
+g <- ggplot()+geom_line(aes(x=time,y=value,group=sim,color=sim,alpha=sim),data=pointc)+theme_bw()+facet_grid(variable ~ .,scales="free_y")
+g <- g+scale_color_manual(values=colors)+scale_alpha_manual(values=alphas)
 g
 ```
 
+Goodness of fit: 
 
-```{r eval=TRUE,echo=FALSE,output=FALSE,results="hide",message=FALSE,warning=FALSE} 
+```{r eval=TRUE,echo=FALSE,output=FALSE,results='asis',message=FALSE,warning=FALSE} 
 
 library(hydroGOF)
 
@@ -174,30 +202,77 @@ oo <-   oo %>% tapply(INDEX=sims,FUN=do.call,what="cbind") %>% map(function(x){x
 
 oo <- oo %>% do.call(what=rbind)
 rownames(oo) <- NULL
-(knitr::kable(oo))
-
-######
-#for (it in names(oo)) {
-#   
-#   print(knitr::kable(oo[[it]]))
-#   
-#}
-
-
-######
+knitr::kable(oo)
 
 ```
 
 
 
-### Observations:
-Snow heigth mm, Snow Water Equivalent mm, T surface C, T soil 10cm C,T soil 20cm C,T soil 50cm C
 
 
 
 
+### Winter 2002/2003
+
+Here is a comparison plot:
+
+```{r eval=TRUE,echo=FALSE,output=FALSE,results="hide",message=FALSE}
+
+###{r echo=FALSE,out.width='90%', fig.align='center', fig.cap=NULL, fig.height=5,results='asis',warning=FALSE}
+
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(purrr)
+##library(RColorBrewer)
+
+####  https://colorbrewer2.org/#type=qualitative&scheme=Set3&n=8
+color_obs <- "black"
+colors <- c("#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5",color_obs)
+names(colors) <- point$sim %>% unique()
+
+if (colors["obs"]!=color_obs) {
+   
+   colors[names(colors)!="obs"] <- colors[colors!=color_obs]
+   colors["obs"] <- color_obs
+   
+}
+alphas <- array(0.5,length(colors))
+names(alphas) <- names(colors)
+alphas["obs"] <- 1
+####
+
+year <- 2002
+start <- "%04d-08-01" %>% sprintf(year) %>% as.Date()
+end <- start+years(1)
+
+pointc <- point %>% filter(variable %in% nobs) %>% filter(time >= start & time<=end)
+
+g <- ggplot()+geom_line(aes(x=time,y=value,group=sim,color=sim,alpha=sim),data=pointc)+theme_bw()+facet_grid(variable ~ .,scales="free_y")
+g <- g+scale_color_manual(values=colors)+scale_alpha_manual(values=alphas)
+g
+```
+
+Goodness of fit: 
+
+```{r eval=TRUE,echo=FALSE,output=FALSE,results='asis',message=FALSE,warning=FALSE} 
+
+library(hydroGOF)
 
 
+obsc <- pointc %>% filter(sim=="obs") %>% transmute(time=time,variable=variable,obs=value)
+pointd <- pointc %>% group_by(sim) %>% left_join(obsc) %>% as.data.frame()
+
+oo <- pointd %>% group_by(sim,variable) %>% group_split() %>% map(as.data.frame) %>% map(function(x) {o <- as.data.frame(gof(sim=x[,"value"],obs=x[,"obs"]));names(o) <- x[1,"variable"];o$sim <- x[1,"sim"];o$gof <- rownames(o);return(o)})  
+
+sims <- sapply(oo,FUN=function(x){x[1,"sim"]})
+oo <-   oo %>% tapply(INDEX=sims,FUN=do.call,what="cbind") %>% map(function(x){x[,!(duplicated(names(x)))]}) %>% map(function(x){x[c(c("sim","gof"),names(x)[!(names(x) %in% c("sim","gof"))])]}) %>% map(function(x) {x %>% filter(gof %in% c("MAE","RMSE","KGE"))}) 
+
+oo <- oo %>% do.call(what=rbind)
+rownames(oo) <- NULL
+knitr::kable(oo)
+
+```
 
 ### References
 
