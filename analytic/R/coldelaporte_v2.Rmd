@@ -170,14 +170,18 @@ pointd <- pointc %>% group_by(sim) %>% left_join(obsc) %>% as.data.frame()
 oo <- pointd %>% group_by(sim,variable) %>% group_split() %>% map(as.data.frame) %>% map(function(x) {o <- as.data.frame(gof(sim=x[,"value"],obs=x[,"obs"]));names(o) <- x[1,"variable"];o$sim <- x[1,"sim"];o$gof <- rownames(o);return(o)})  
 
 sims <- sapply(oo,FUN=function(x){x[1,"sim"]})
-oo <-   oo %>% tapply(INDEX=sims,FUN=do.call,what="cbind") %>% map(function(x){x[,!(duplicated(names(x))) & names(x)!="sim"]}) %>% map(function(x){x[c(c("gof"),names(x)[names(x)!="gof"])]}) %>% map(function(x) {x %>% filter(gof %in% c("MAE","RMSE","KGE"))}) 
+oo <-   oo %>% tapply(INDEX=sims,FUN=do.call,what="cbind") %>% map(function(x){x[,!(duplicated(names(x)))]}) %>% map(function(x){x[c(c("sim","gof"),names(x)[!(names(x) %in% c("sim","gof"))])]}) %>% map(function(x) {x %>% filter(gof %in% c("MAE","RMSE","KGE"))}) 
+
+oo <- oo %>% do.call(what=rbind)
+rownames(oo) <- NULL
+(knitr::kable(oo))
 
 ######
-for (it in names(oo)) {
-   
-   print(knitr::kable(oo[[it]]))
-   
-}
+#for (it in names(oo)) {
+#   
+#   print(knitr::kable(oo[[it]]))
+#   
+#}
 
 
 ######
